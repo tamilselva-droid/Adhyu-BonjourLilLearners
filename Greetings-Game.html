@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>French Game - Match the Pairs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      min-height: 100vh;
+      text-align: center;
+    }
+    header {
+      background: linear-gradient(90deg, #ff9a9e, #4facfe);
+      padding: 15px;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: slideDown 0.8s ease;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    h1 { margin: 0; font-size: 2.3rem; }
+
+    .nav-btn {
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
+    .nav-btn:hover { transform: scale(1.08); }
+
+    .game-container {
+      max-width: 950px;
+      margin: 35px auto;
+      background: rgba(255,255,255,0.95);
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      animation: popIn 0.6s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .top-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .stars { font-size: 1.8rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #ffe259, #ffa751);
+      border-radius: 18px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, background 0.3s ease;
+      user-select: none;
+    }
+
+    .card:hover { transform: scale(1.07) rotate(-1deg); }
+    .card.flipped { background: #fff; font-size: 1.3rem; }
+    .card.matched {
+      background: #8aff8a;
+      cursor: default;
+      animation: bounce 0.5s ease;
+    }
+
+    @keyframes bounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .status { margin: 0; font-size: 1.4rem; }
+
+ /* Reusable CTA button style from Index */
+        .cta {
+            background: linear-gradient(90deg, #ff512f, #dd2476);
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .cta-home {
+            background: linear-gradient(90deg, #107CFE, #4facfe);
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+        }
+
+
+    button {
+      margin-top: 25px;
+      padding: 12px 35px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      color: #fff;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    button:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+
+<header>
+
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+    <a href="index.html" class="cta cta-home">&#8592; Back</a>
+      <h1>Match the Pairs</h1>
+      <button onclick="resetGame()">Restart Game</button>
+  </div>
+</header>
+
+<div class="game-container">
+  <div class="top-stats">
+    <div>Time: <span id="time">0</span> s</div>
+  <div class="status" id="status">Matches found: 0</div>
+    <div class="stars" id="stars" style="display:none;"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+
+</div>
+
+<script>
+  const pairs = [
+    { fr: 'Bonjour', en: 'Hello' },
+    { fr: 'Au revoir', en: 'Goodbye' },
+    { fr: 'Merci', en: 'Thank you' },
+    { fr: 'Oui', en: 'Yes' },
+    { fr: 'Non', en: 'No' },
+    { fr: 'Salut', en: 'Hi' },
+    { fr: 'Excusez-moi', en: 'Excuse me' },
+    { fr: 'Bienvenue', en: 'Welcome' },
+    { fr: 'Bonne nuit', en: 'Good night' }
+  ];
+
+  const backIcons = ['&#128508;'];
+
+  let cards = [];
+  let firstCard = null;
+  let secondCard = null;
+  let lockBoard = false;
+  let matches = 0;
+  let timer = 0;
+  let timerInterval;
+
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    timer = 0;
+    document.getElementById('time').textContent = timer;
+    timerInterval = setInterval(() => {
+      timer++;
+      document.getElementById('time').textContent = timer;
+    }, 1000);
+  }
+
+  function updateStars() {
+    // Determine star rating based on time
+    let starCount = 5;
+    if (timer > 15) starCount = 5;
+    if (timer > 30) starCount = 4;
+    if (timer > 45) starCount = 3;
+    if (timer > 75) starCount = 2;
+
+    // Create colorful stars
+    let colors = ['#FFD700', '#FF8C00', '#FF4500']; // gold, orange, red
+    let starsHTML = '';
+    for (let i = 0; i < starCount; i++) {
+      starsHTML += `<span style="color:${colors[i % colors.length]}">&#9733;</span>`;
+    }
+    document.getElementById('stars').innerHTML = starsHTML;
+}
+
+  function createCards() {
+    cards = [];
+    const limitedPairs = pairs.slice(0, 6);
+    limitedPairs.forEach((pair, i) => {
+      const icon = backIcons[i % backIcons.length];
+      cards.push({ text: pair.fr, match: pair.en, icon });
+      cards.push({ text: pair.en, match: pair.fr, icon });
+    });
+    shuffle(cards);
+  }
+
+  function renderCards() {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+
+    cards.forEach(cardData => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = cardData.icon;
+      card.onclick = () => flipCard(card, cardData);
+      grid.appendChild(card);
+    });
+  }
+
+  function flipCard(card, data) {
+    if (lockBoard || card.classList.contains('matched') || card === firstCard) return;
+
+    card.textContent = data.text;
+    card.classList.add('flipped');
+
+    if (!firstCard) {
+      firstCard = { card, data };
+      return;
+    }
+
+    secondCard = { card, data };
+    checkMatch();
+  }
+
+  function checkMatch() {
+    if (firstCard.data.match === secondCard.data.text) {
+      firstCard.card.classList.add('matched');
+      secondCard.card.classList.add('matched');
+      matches++;
+      document.getElementById('status').textContent = 'Matches found: ' + matches;
+
+      if (matches === 6) {
+        clearInterval(timerInterval);
+        // Show stars only when the game is complete
+        updateStars();
+        document.getElementById('stars').style.display = 'inline-block';
+      }
+      resetTurn();
+    } else {
+      lockBoard = true;
+      setTimeout(() => {
+        firstCard.card.innerHTML = firstCard.data.icon;
+        secondCard.card.innerHTML = secondCard.data.icon;
+        firstCard.card.classList.remove('flipped');
+        secondCard.card.classList.remove('flipped');
+        resetTurn();
+      }, 900);
+    }
+}
+
+  function resetTurn() {
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+  }
+
+  function resetGame() {
+    matches = 0;
+    document.getElementById('status').textContent = 'Matches found: 0';
+    document.getElementById('stars').innerHTML = '';
+    createCards();
+    renderCards();
+    resetTurn();
+    startTimer();
+
+  }
+
+  resetGame();
+</script>
+
+</body>
+</html>

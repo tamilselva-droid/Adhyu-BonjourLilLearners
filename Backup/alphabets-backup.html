@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabets - Learn French</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fdfdfd;
+        }
+
+        body::before {
+            content: '';
+            background-image: url('Images/alphabets.png');
+            background-size: cover;
+            background-position: center;
+            position: fixed; /* Fixed so it stays put while scrolling */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1; /* Slightly lower for better text contrast */
+            z-index: -1;
+        }
+
+        h1 {
+            color: #d5006d;
+            font-size: 48px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .word-container {
+            display: grid;
+            /* Creates 6 equal columns, shifts to 3 or 2 on smaller screens */
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .word-box {
+            background-color: #ffd700;
+            padding: 20px 10px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 80px;
+        }
+
+        .word-box:hover {
+            background-color: #ffec8b;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            border-color: #d5006d;
+        }
+
+        /* Styling for the pronunciation text inside the box */
+        .phonetic {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 12px 30px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #d5006d;
+        }
+
+        /* Responsive adjustments for tablets and phones */
+        @media (max-width: 768px) {
+            .word-container { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .word-container { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Alphabets en français</h1>
+
+    <div class="word-container">
+        <div class="word-box" onclick="playAudio('AL1')">A <span class="phonetic">/ah/</span></div>
+        <div class="word-box" onclick="playAudio('AL2')">B <span class="phonetic">/bay/</span></div>
+        <div class="word-box" onclick="playAudio('AL3')">C <span class="phonetic">/say/</span></div>
+        <div class="word-box" onclick="playAudio('AL4')">D <span class="phonetic">/day/</span></div>
+        <div class="word-box" onclick="playAudio('AL5')">E <span class="phonetic">/uh/</span></div>
+        <div class="word-box" onclick="playAudio('AL6')">F <span class="phonetic">/eff/</span></div>
+        <div class="word-box" onclick="playAudio('AL7')">G <span class="phonetic">/zhay/</span></div>
+        <div class="word-box" onclick="playAudio('AL8')">H <span class="phonetic">/ahsh/</span></div>
+        <div class="word-box" onclick="playAudio('AL9')">I <span class="phonetic">/ee/</span></div>
+        <div class="word-box" onclick="playAudio('AL10')">J <span class="phonetic">/zhee/</span></div>
+        <div class="word-box" onclick="playAudio('AL11')">K <span class="phonetic">/kah/</span></div>
+        <div class="word-box" onclick="playAudio('AL12')">L <span class="phonetic">/ell/</span></div>
+        <div class="word-box" onclick="playAudio('AL13')">M <span class="phonetic">/emm/</span></div>
+        <div class="word-box" onclick="playAudio('AL14')">N <span class="phonetic">/enn/</span></div>
+        <div class="word-box" onclick="playAudio('AL15')">O <span class="phonetic">/oh/</span></div>
+        <div class="word-box" onclick="playAudio('AL16')">P <span class="phonetic">/pay/</span></div>
+        <div class="word-box" onclick="playAudio('AL26')">Q <span class="phonetic">/koo/</span></div>
+        <div class="word-box" onclick="playAudio('AL17')">R <span class="phonetic">/air/</span></div>
+        <div class="word-box" onclick="playAudio('AL18')">S <span class="phonetic">/ess/</span></div>
+        <div class="word-box" onclick="playAudio('AL19')">T <span class="phonetic">/tay/</span></div>
+        <div class="word-box" onclick="playAudio('AL20')">U <span class="phonetic">/oo/</span></div>
+        <div class="word-box" onclick="playAudio('AL21')">V <span class="phonetic">/vay/</span></div>
+        <div class="word-box" onclick="playAudio('AL22')">W <span class="phonetic">/doo-bluh vay/</span></div>
+        <div class="word-box" onclick="playAudio('AL23')">X <span class="phonetic">/eeks/</span></div>
+        <div class="word-box" onclick="playAudio('AL24')">Y <span class="phonetic">/ee-grek/</span></div>
+        <div class="word-box" onclick="playAudio('AL25')">Z <span class="phonetic">/zed/</span></div>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Main Page</a>
+
+    <script>
+        function playAudio(word) {
+            const audio = new Audio(word + ".mp3");
+            audio.play();
+        }
+    </script>
+</body>
+</html>

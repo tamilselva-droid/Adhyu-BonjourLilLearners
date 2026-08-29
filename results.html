@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results - Learn French</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --primary: #4facfe;
+            --secondary: #ff9a9e;
+            --accent: #ffe259;
+            --purple: #5c2d91;
+            --orange: #f18738;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Baloo 2', cursive;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Header matching the app theme */
+        header {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            padding: 20px 15px;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            flex: 1;
+        }
+
+        .cta {
+            background: linear-gradient(90deg, #ff512f, #dd2476);
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .cta:hover { transform: scale(1.05); }
+
+        .container {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Chart Section */
+        .results-chart {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        /* Stats Section */
+        .results-stats {
+            background: #FFEE93;
+            border: 6px solid #FFAA4C;
+            border-radius: 30px;
+            padding: 30px;
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-stats h2 {
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-top: 0;
+        }
+
+        .results-stats p {
+            font-size: 1.3rem;
+            margin: 12px 0;
+            color: #444;
+            border-bottom: 2px dashed rgba(255, 170, 76, 0.4);
+            padding-bottom: 5px;
+        }
+
+        .results-stats strong { color: #000; }
+
+        .continue-btn {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: var(--purple);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            font-family: 'Baloo 2', cursive;
+            font-size: 1.4rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .continue-btn:hover {
+            background-color: #461f70;
+            transform: translateY(-3px);
+        }
+
+        .nav-spacer { width: 160px; }
+
+        @media (max-width: 600px) {
+            .nav-spacer { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="cta">⬅ Back to Home</a>
+        <h1>Bravo ! Results</h1>
+        <div class="nav-spacer"></div>
+    </header>
+
+    <div class="container">
+        <div class="results-chart">
+            <canvas id="resultsChart"></canvas>
+        </div>
+
+        <div class="results-stats">
+            <h2>You did it! 🎉</h2>
+            <p><strong>Correct:</strong> <span id="correctQuestions">0</span> ✅</p>
+            <p><strong>Incorrect:</strong> <span id="incorrectAnswers">0</span> ❌</p>
+            <p><strong>Total:</strong> <span id="totalQuestions">0</span></p>
+            <p><strong>Accuracy:</strong> <span id="accuracy">0%</span> ⭐</p>
+
+            <button onclick="goToMainPage()" class="continue-btn">Play Again 🚀</button>
+        </div>
+    </div>
+
+    <script>
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substr(1).split("&").forEach(function(item) {
+                const [key, value] = item.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        const params = getQueryParams();
+        const correctAnswers = parseInt(params.correctAnswers, 10) || 0;
+        const totalQuestions = parseInt(params.totalQuestions, 10) || 5;
+        const incorrectAnswers = totalQuestions - correctAnswers;
+
+        document.getElementById('correctQuestions').textContent = correctAnswers;
+        document.getElementById('incorrectAnswers').textContent = incorrectAnswers;
+        document.getElementById('totalQuestions').textContent = totalQuestions;
+        document.getElementById('accuracy').textContent = ((correctAnswers / totalQuestions) * 100).toFixed(0) + '%';
+
+        function goToMainPage() {
+            window.location.href = 'quiz.html';
+        }
+
+        // Refined Chart.js Config
+        const ctx = document.getElementById('resultsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Correct', 'Incorrect'],
+                datasets: [{
+                    data: [correctAnswers, incorrectAnswers],
+                    backgroundColor: ['#5c2d91', '#f18738'],
+                    borderColor: '#fff',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: "'Baloo 2'", size: 16 } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

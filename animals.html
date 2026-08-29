@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals - Learn French</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #4facfe;
+            --secondary: #ff9a9e;
+            --accent: #ffe259;
+            --dark: #333;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Baloo 2', cursive;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Header layout matching Greetings.html */
+        header {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            padding: 20px 15px;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            flex: 1;
+        }
+
+        /* Standardized CTA button style */
+            .cta {
+	   		  display: inline-block;
+	   		  margin-top: 20px;
+	   		  background: linear-gradient(90deg, #ff512f, #dd2476);
+	   		  color: #fff;
+	   		  padding: 10px 30px;
+	   		  border-radius: 50px;
+	   		  font-size: 1.1rem;
+	   		  text-decoration: none;
+	   		  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+	   		  transition: transform 0.2s ease;
+	   }
+
+	   .cta-home {
+	               background: linear-gradient(90deg, #107CFE, #4facfe);
+	           }
+
+	           .cta:hover {
+	               transform: scale(1.05);
+	           }
+
+	   header .cta + .cta {
+	       margin-left: 10px;
+	   }
+	           .container {
+	               padding: 40px 20px;
+	               max-width: 1000px;
+	               margin: auto;
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .word-container {
+            display: grid;
+            /* Adaptive grid matching the Greetings page style */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .word-box {
+            background-color: rgba(255, 255, 255, 0.8); /* See-through white */
+            padding: 30px 20px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .word-box:hover {
+            background-color: #fff;
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            color: #dd2476;
+        }
+
+        .translation {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5rem; }
+            .cta { padding: 8px 15px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="cta cta-home">⬅ Back to Home</a>
+	    <h1>Animaux en français</h1>
+	    <a href="Animals-quiz.html" class="cta">Take Quiz 🚀</a>
+    <a href="Animals-Game.html" class="cta">Play Game 🎲</a>
+</header>
+
+<div class="container">
+    <div class="word-container">
+        <div class="word-box" onclick="playAudio('A1')">Chat <span class="translation">Cat</span></div>
+        <div class="word-box" onclick="playAudio('A2')">Chien <span class="translation">Dog</span></div>
+        <div class="word-box" onclick="playAudio('A3')">Oiseau <span class="translation">Bird</span></div>
+        <div class="word-box" onclick="playAudio('A4')">Cheval <span class="translation">Horse</span></div>
+        <div class="word-box" onclick="playAudio('A5')">Vache <span class="translation">Cow</span></div>
+        <div class="word-box" onclick="playAudio('A6')">Papillon <span class="translation">Butterfly</span></div>
+        <div class="word-box" onclick="playAudio('A7')">Jaguar <span class="translation">Jaguar</span></div>
+        <div class="word-box" onclick="playAudio('A8')">Lion <span class="translation">Lion</span></div>
+        <div class="word-box" onclick="playAudio('A9')">Éléphant <span class="translation">Elephant</span></div>
+        <div class="word-box" onclick="playAudio('A10')">Lapin <span class="translation">Rabbit</span></div>
+        <div class="word-box" onclick="playAudio('A11')">Perroquet <span class="translation">Parrot</span></div>
+        <div class="word-box" onclick="playAudio('A12')">Tigre <span class="translation">Tiger</span></div>
+    </div>
+</div>
+
+<script>
+    function playAudio(word) {
+        const audio = new Audio("Audio/Animals/" + word + ".mp3");
+        audio.play().catch(e => console.log("Audio file not found: " + word + ".mp3"));
+    }
+</script>
+
+</body>
+</html>

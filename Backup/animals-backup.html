@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals - Learn French</title>
+    <style>
+        body {
+            
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+body::before {
+            content: '';
+            background-image: url('Images/Animals.png'); /* Replace with actual image URL */
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2; /* Control the transparency level here */
+            z-index: -1;
+        }
+
+        h1 {
+            color: #d5006d; /* Bright pink color for title */
+            font-size: 58px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Subtle shadow for depth */
+            margin-top: -7px; /* Adjust title margin */
+margin-bottom: 30px; /* Space below title */
+
+        }
+        .word-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .word-box {
+            background-color: #ffcccb;
+            padding: 20px;
+            border-radius: 15px;
+            width: 200px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+               transition: background-color 0.3s, transform 0.3s;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+        .word-box:hover {
+            background-color: #ff9999;
+            transform: scale(1.1);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ffeb3b;
+            color: #000;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        .back-link:hover {
+            background-color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <h1>Animaux en français</h1>
+    
+    <div class="word-container">
+        <div class="word-box" onclick="playAudio('A1')">Chat - Cat</div>
+        <div class="word-box" onclick="playAudio('A2')">Chien - Dog</div>
+        <div class="word-box" onclick="playAudio('A3')">Oiseau - Bird</div>
+        <div class="word-box" onclick="playAudio('A4')">Cheval - Horse</div>
+        <div class="word-box" onclick="playAudio('A5')">Vache - Cow</div>
+<div class="word-box" onclick="playAudio('A6')">Papillon - Butterfly</div>
+        <div class="word-box" onclick="playAudio('A7')">Jaguar - Jaguar</div>
+        <div class="word-box" onclick="playAudio('A8')">Lion - Lion</div>
+        <div class="word-box" onclick="playAudio('A9')">Éléphant - Elephant</div>
+        <div class="word-box" onclick="playAudio('A10')">Lapin - Rabbit</div>
+       <div class="word-box" onclick="playAudio('A11')">Perroquet - Parrot</div>
+<div class="word-box" onclick="playAudio('A12')">Tigre - Tiger</div>
+
+    </div>
+
+    <!-- Link to go back to the index page -->
+    <a class="back-link" href="index.html">Back to Main Page</a>
+
+    <script>
+        function playAudio(word) {
+            const audio = new Audio(word + ".mp3");
+            audio.play();
+        }
+    </script>
+</body>
+</html>

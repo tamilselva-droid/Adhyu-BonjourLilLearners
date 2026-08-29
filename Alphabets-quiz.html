@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Greetings Quiz</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #4facfe;
+            --secondary: #ff9a9e;
+            --accent: #ffe259;
+            --dark: #333;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Baloo 2', cursive;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Header layout matching Index and Greetings */
+        header {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            padding: 20px 15px;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            flex: 1;
+        }
+
+        /* CTA button style from Index */
+        .cta {
+            background: linear-gradient(90deg, #ff512f, #dd2476);
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .quiz-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            background-color: #e3f2fd;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .correct {
+            background-color: #22A699 !important;
+            color: white;
+            border-color: #22A699 !important;
+        }
+
+        .feedback-container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .try-again-btn, .continue-btn {
+            font-family: 'Baloo 2', cursive;
+            font-size: 1.1rem;
+            padding: 10px 25px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            color: white;
+            transition: opacity 0.2s;
+        }
+
+        .try-again-btn { background-color: #5da1d7; }
+        .continue-btn { background-color: #f18738; }
+
+        .disabled { pointer-events: none; }
+
+        /* Spacer for header balance */
+        .nav-spacer { width: 160px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="cta">⬅ Back to Home</a>
+    <h1>Quiz de Français</h1>
+    <div class="nav-spacer"></div> </header>
+
+<div class="container">
+    <div id="quiz" class="quiz-card">
+        <div class="question-container">
+            <div id="question" class="question">Loading...</div>
+            <div id="options" class="options"></div>
+        </div>
+        <div id="feedback" style="margin-top:20px; font-weight:bold; color:#22A699;"></div>
+    </div>
+
+    <div id="wrong-answer-feedback" class="feedback-container" style="display: none;">
+        <h2 style="color: #dd2476;">Oops, try again! 💡</h2>
+        <div class="feedback-buttons">
+            <button onclick="tryAgain()" class="try-again-btn">Try again</button>
+            <button onclick="continueQuiz()" class="continue-btn">Skip Question</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // [The original JavaScript logic remains the same here]
+   const questionBank = [
+       { question: "How do you pronounce the letter 'A' in French?", options: ["/ah/", "/ay/", "/eh/"], correct: 0 },
+       { question: "How do you pronounce 'G' in French?", options: ["/gee/", "/zhay/", "/jay/"], correct: 1 },
+       { question: "Which letter is pronounced as '/ee-grek/'?", options: ["I", "G", "Y"], correct: 2 },
+       { question: "How is the French letter 'H' pronounced?", options: ["/ahsh/", "/aych/", "/ha/"], correct: 0 },
+       { question: "What is the pronunciation for the letter 'J'?", options: ["/zhee/", "/jay/", "/zhay/"], correct: 0 },
+       { question: "Which French letter sounds like '/koo/'?", options: ["K", "Q", "U"], correct: 1 },
+       { question: "How do you say the letter 'E' in French?", options: ["/ee/", "/ay/", "/uh/"], correct: 2 },
+       { question: "What is the phonetic sound for 'W'?", options: ["/v-v/", "/doubluh-vay/", "/wee/"], correct: 1 },
+       { question: "Which letter is pronounced as '/say/'?", options: ["S", "C", "K"], correct: 1 },
+       { question: "How is the letter 'R' pronounced in French?", options: ["/air/", "/ar/", "/err/"], correct: 0 },
+       { question: "What is the phonetic pronunciation of 'U'?", options: ["/you/", "/oo/", "/uh/"], correct: 1 },
+       { question: "Which letter is pronounced as '/eeks/'?", options: ["X", "S", "Z"], correct: 0 },
+       { question: "How do you pronounce 'K' in French?", options: ["/kay/", "/kah/", "/kee/"], correct: 1 },
+       { question: "What is the phonetic sound for the letter 'I'?", options: ["/eye/", "/ee/", "/ay/"], correct: 1 },
+       { question: "Which letter is pronounced as '/zed/'?", options: ["Z", "S", "C"], correct: 0 }
+];
+
+    function getRandomQuestions() {
+        const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, 5);
+    }
+
+    let questions = getRandomQuestions();
+    let currentQuestion = 0;
+    let correctAnswers = 0;
+
+    function loadQuestion() {
+        const questionEl = document.getElementById("question");
+        const optionsEl = document.getElementById("options");
+        const feedbackEl = document.getElementById("feedback");
+
+        feedbackEl.textContent = '';
+        document.getElementById('wrong-answer-feedback').style.display = 'none';
+        questionEl.textContent = questions[currentQuestion].question;
+        optionsEl.innerHTML = '';
+
+        questions[currentQuestion].options.forEach((option, index) => {
+            const optionEl = document.createElement("div");
+            optionEl.classList.add("option");
+            optionEl.textContent = option;
+            optionEl.onclick = () => handleAnswer(index);
+            optionsEl.appendChild(optionEl);
+        });
+    }
+
+    function handleAnswer(selected) {
+        const feedbackEl = document.getElementById("feedback");
+        const correctOption = questions[currentQuestion].correct;
+        const optionsEl = document.getElementById("options").children;
+
+        for (let option of optionsEl) { option.classList.add("disabled"); }
+
+        if (selected === correctOption) {
+            optionsEl[selected].classList.add("correct");
+            correctAnswers++;
+            feedbackEl.style.color = "green";
+            feedbackEl.innerHTML = 'Magnifique! Correct! 🎉';
+            setTimeout(nextQuestion, 900);
+        } else {
+            feedbackEl.style.color = "red";
+						feedbackEl.innerHTML = 'Oops, Wrong Answer! 💡';
+
+            setTimeout(nextQuestion, 900);
+        }
+    }
+
+    function tryAgain() {
+        document.getElementById('wrong-answer-feedback').style.display = 'none';
+        const optionsEl = document.getElementById("options").children;
+        for (let option of optionsEl) { option.classList.remove("disabled"); }
+    }
+
+    function continueQuiz() {
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            loadQuestion();
+        } else {
+            window.location.href = `results.html?correctAnswers=${correctAnswers}&totalQuestions=${questions.length}`;
+        }
+    }
+
+    window.onload = loadQuestion;
+</script>
+
+</body>
+</html>

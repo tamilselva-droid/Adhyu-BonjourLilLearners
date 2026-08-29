@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabets - Learn French</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #4facfe;
+            --secondary: #ff9a9e;
+            --accent: #ffe259;
+            --dark: #333;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Baloo 2', cursive;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff); /* Matching background */
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Header layout matching Greetings.html */
+        header {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            padding: 20px 15px;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            flex: 1;
+        }
+
+        /* Reusable CTA button style */
+              .cta {
+	  		  display: inline-block;
+	  		  margin-top: 20px;
+	  		  background: linear-gradient(90deg, #ff512f, #dd2476);
+	  		  color: #fff;
+	  		  padding: 10px 30px;
+	  		  border-radius: 50px;
+	  		  font-size: 1.1rem;
+	  		  text-decoration: none;
+	  		  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+	  		  transition: transform 0.2s ease;
+	  }
+
+	  .cta-home {
+	              background: linear-gradient(90deg, #107CFE, #4facfe);
+	          }
+
+	          .cta:hover {
+	              transform: scale(1.05);
+	          }
+
+	  header .cta + .cta {
+	      margin-left: 10px;
+}
+
+        .container {
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .word-container {
+            display: grid;
+            /* Adaptive grid: 6 columns on desktop, fewer on mobile */
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .word-box {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 20px 10px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .word-box:hover {
+            background-color: #fff;
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            color: #dd2476;
+        }
+
+        .phonetic {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        /* Responsive title scaling */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5rem; }
+            .cta { padding: 8px 15px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+
+  <a href="index.html" class="cta cta-home">⬅ Back to Home</a>
+    <h1>L'Alphabet français</h1>
+    <a href="Alphabets-quiz.html" class="cta">Take Quiz 🚀</a>
+
+    <a href="Alphabets-Game.html" class="cta">Play Game 🎲</a>
+
+</header>
+
+<div class="container">
+    <div class="word-container">
+        <div class="word-box" onclick="playAudio('AL1')">A <span class="phonetic">/ah/</span></div>
+        <div class="word-box" onclick="playAudio('AL2')">B <span class="phonetic">/bay/</span></div>
+        <div class="word-box" onclick="playAudio('AL3')">C <span class="phonetic">/say/</span></div>
+        <div class="word-box" onclick="playAudio('AL4')">D <span class="phonetic">/day/</span></div>
+        <div class="word-box" onclick="playAudio('AL5')">E <span class="phonetic">/uh/</span></div>
+        <div class="word-box" onclick="playAudio('AL6')">F <span class="phonetic">/eff/</span></div>
+        <div class="word-box" onclick="playAudio('AL7')">G <span class="phonetic">/zhay/</span></div>
+        <div class="word-box" onclick="playAudio('AL8')">H <span class="phonetic">/ahsh/</span></div>
+        <div class="word-box" onclick="playAudio('AL9')">I <span class="phonetic">/ee/</span></div>
+        <div class="word-box" onclick="playAudio('AL10')">J <span class="phonetic">/zhee/</span></div>
+        <div class="word-box" onclick="playAudio('AL11')">K <span class="phonetic">/kah/</span></div>
+        <div class="word-box" onclick="playAudio('AL12')">L <span class="phonetic">/ell/</span></div>
+        <div class="word-box" onclick="playAudio('AL13')">M <span class="phonetic">/emm/</span></div>
+        <div class="word-box" onclick="playAudio('AL14')">N <span class="phonetic">/enn/</span></div>
+        <div class="word-box" onclick="playAudio('AL15')">O <span class="phonetic">/oh/</span></div>
+        <div class="word-box" onclick="playAudio('AL16')">P <span class="phonetic">/pay/</span></div>
+        <div class="word-box" onclick="playAudio('AL26')">Q <span class="phonetic">/koo/</span></div>
+        <div class="word-box" onclick="playAudio('AL17')">R <span class="phonetic">/air/</span></div>
+        <div class="word-box" onclick="playAudio('AL18')">S <span class="phonetic">/ess/</span></div>
+        <div class="word-box" onclick="playAudio('AL19')">T <span class="phonetic">/tay/</span></div>
+        <div class="word-box" onclick="playAudio('AL20')">U <span class="phonetic">/oo/</span></div>
+        <div class="word-box" onclick="playAudio('AL21')">V <span class="phonetic">/vay/</span></div>
+        <div class="word-box" onclick="playAudio('AL22')">W <span class="phonetic">/doubluh-vay/</span></div>
+        <div class="word-box" onclick="playAudio('AL23')">X <span class="phonetic">/eeks/</span></div>
+        <div class="word-box" onclick="playAudio('AL24')">Y <span class="phonetic">/ee-grek/</span></div>
+        <div class="word-box" onclick="playAudio('AL25')">Z <span class="phonetic">/zed/</span></div>
+    </div>
+</div>
+
+<script>
+    function playAudio(word) {
+        const audio = new Audio("Audio/Alphabets/" + word + ".mp3");
+        audio.play().catch(e => console.log("Audio file not found: " + word + ".mp3"));
+    }
+</script>
+
+</body>
+</html>

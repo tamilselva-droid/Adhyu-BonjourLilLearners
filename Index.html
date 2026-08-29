@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bonjour Little Learners!</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #4facfe;
+  --secondary: #ff9a9e;
+  --accent: #ffe259;
+  --dark: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Baloo 2', cursive;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  overflow-x: hidden;
+}
+
+header {
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+  padding: 10px 15px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+
+.mascot {
+  width: 120px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+  align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+
+.card {
+  position: relative;
+  /* Ensure the background image is visible but contained */
+  background-size: cover;
+  background-position: center;
+  border-radius: 25px;
+  /* Flexbox makes centering text easy */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 170px;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* This creates the "See-Through" effect */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Increase the last number (0.6) to make it darker/more see-through */
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.card:hover::before {
+  background: rgba(255, 255, 255, 0.4); /* Gets clearer on hover */
+}
+
+.card h2 {
+  position: relative;
+  z-index: 2; /* Sits above the see-through layer */
+  color: #dd2476;
+  font-size: 2rem;
+  margin: 0;
+}
+
+
+
+.card img {
+  width: 90px;
+  margin-bottom: 30px;
+}
+
+
+
+.card span {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  color: #dd2476;
+ }
+
+.cta {
+  display: inline-block;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.cta-home {
+            background: linear-gradient(90deg, #107CFE, #4facfe);
+        }
+
+.cta:hover {
+  transform: scale(1.08);
+}
+
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+}
+
+footer img {
+  width: 40px;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+/* Fun background bubbles */
+.bubble {
+  position: fixed;
+  bottom: -100px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%;
+  animation: rise 12s infinite ease-in;
+}
+
+@keyframes rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-120vh); }
+}
+</style>
+</head>
+
+<body>
+
+
+<header>
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+
+    <a href="Welcome.html" class="cta cta-home">⬅ Welcome Page</a>
+    <div style="text-align:center; flex:1;">
+          <h1>Apprendre le français</h1>
+      <p>Fun French learning for kids!</p>
+    </div>
+
+     <a href="Quiz-selection.html" class="cta">Take Quiz 🚀</a>
+     <a href="Game.html" class="cta">Play Game 🎲</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="grid">
+    <div class="card" style="background-image:url('Images/BG.png')" onclick="location.href='greetings.html'">
+	  <h2>Salutations</h2>
+
+	</div>
+
+    <div class="card" style="background-image:url('Images/alphabets.png')" onclick="location.href='alphabets.html'">
+	  <h2>Alphabets</h2>
+
+	</div>
+
+    <div class="card" style="background-image:url('Images/numbers.png')" onclick="location.href='numbers.html'">
+	  <h2>Nombres</h2>
+
+	</div>
+
+    <div class="card" style="background-image:url('Images/Colours.png')" onclick="location.href='colours.html'">
+	  <h2>Couleurs</h2>
+
+	</div>
+
+    <div class="card" style="background-image:url('Images/animals.png')" onclick="location.href='animals.html'">
+	  <h2>Animaux</h2>
+
+	</div>
+
+    <div class="card" style="background-image:url('Images/fruits.png')" onclick="location.href='fruits.html'">
+	  <h2>Fruits</h2>
+
+	</div>
+<div class="card" style="background-image:url('Images/BG.png')" onclick="location.href='months.html'">
+      <h2>Mois</h2>
+    </div>
+
+    <div class="card" style="background-image:url('Images/bg2.png')" onclick="location.href='vehicles.html'">
+      <h2>Véhicules</h2>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Decorative bubbles
+<script>
+for (let i = 0; i < 20; i++) {
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.style.left = Math.random() * 100 + 'vw';
+  bubble.style.width = bubble.style.height = 20 + Math.random() * 60 + 'px';
+  bubble.style.animationDuration = 8 + Math.random() * 10 + 's';
+  document.body.appendChild(bubble);
+}
+</script>
+ -->
+</body>
+</html>

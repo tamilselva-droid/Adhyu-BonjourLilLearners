@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	    <title>Bienvenue | French Pronunciation</title>
+
+	    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+    :root {
+	            --primary: #107CFE;
+	            --accent: #ff69b4;
+	            --text-light: #ffffff;
+	        }
+
+	        * {
+	            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('Images/welcome-background.jpg'); /* Replace with an appropriate image URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+body::before {
+            content: '';
+            background-image: url('Images/Welcome.png'); /* Replace with actual image URL */
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.40; /* Control the transparency level here */
+            z-index: -1;
+        }
+
+        /* HERO CARD */
+		        .hero {
+		            text-align: center;
+		            background: rgba(255, 255, 255, 0.1);
+		            backdrop-filter: blur(6px);
+		            padding: 60px 40px;
+		            border-radius: 20px;
+		            max-width: 720px;
+		            width: 90%;
+		            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+		            animation: fadeInUp 1s ease-out;
+		        }
+
+
+
+          h1 {
+		            font-size: clamp(2.2rem, 5vw, 3rem);
+		            color: var(--accent);
+		            margin-bottom: 10px;
+		        }
+
+		        h2 {
+		            font-size: clamp(1.4rem, 4vw, 2rem);
+		            margin-bottom: 16px;
+		        }
+
+		        .subtitle {
+		            font-size: 1.05rem;
+		            line-height: 1.6;
+		            opacity: 0.95;
+		            margin-bottom: 30px;
+		        }
+
+		        h3 {
+		            font-size: 0.95rem;
+		            font-weight: 400;
+		            opacity: 0.85;
+		            margin-bottom: 40px;
+        }
+
+        .start-link {
+            margin-top: 30px; /* Space above the link */
+            text-decoration: none;
+            background-color: #107CFE; /* Blue background */
+            padding: 10px 20px; /* Padding around the text */
+            border-radius: 10px; /* Rounded corners */
+            color: #FFFFFF; /* White text color */
+            font-size: 40px; /* Font size */
+            transition: background-color 0.3s; /* Transition effect */
+        }
+
+        .start-link:hover {
+            background-color: #ffea00; /* Slightly brighter yellow on hover */
+        }
+
+
+		        /* SOUND ICON */
+		        .sound {
+		            display: inline-flex;
+		            align-items: center;
+		            gap: 10px;
+		            margin-bottom: 35px;
+		            cursor: pointer;
+		            animation: float 3s ease-in-out infinite;
+		        }
+
+		        .sound-icon {
+		            font-size: 2.2rem;
+		        }
+
+		        .waves span {
+		            display: inline-block;
+		            width: 6px;
+		            height: 16px;
+		            background: #fff;
+		            margin: 0 2px;
+		            border-radius: 4px;
+		            animation: wave 1.2s infinite ease-in-out;
+		        }
+
+		        .waves span:nth-child(2) { animation-delay: 0.2s; }
+        .waves span:nth-child(3) { animation-delay: 0.4s; }
+
+         /* CTA BUTTON */
+		        .cta {
+		            display: inline-block;
+		            text-decoration: none;
+		            background: var(--primary);
+		            color: #fff;
+		            font-size: 1.2rem;
+		            font-weight: 600;
+		            padding: 14px 42px;
+		            border-radius: 999px;
+		            box-shadow: 0 10px 20px rgba(16, 124, 254, 0.4);
+		            transition: transform 0.2s ease, box-shadow 0.2s ease;
+		        }
+
+		        .cta:hover {
+		            transform: translateY(-3px) scale(1.03);
+            		box-shadow: 0 14px 28px rgba(16, 124, 254, 0.6);
+        				}
+
+        		 /* ANIMATIONS */
+				        @keyframes fadeInUp {
+				            from { opacity: 0; transform: translateY(25px); }
+				            to { opacity: 1; transform: translateY(0); }
+				        }
+
+				        @keyframes bounceIn {
+				            0% { transform: scale(0.6); opacity: 0; }
+				            60% { transform: scale(1.1); }
+				            100% { transform: scale(1); opacity: 1; }
+				        }
+
+				        @keyframes float {
+				            0%, 100% { transform: translateY(0); }
+				            50% { transform: translateY(-6px); }
+				        }
+
+				        @keyframes wave {
+				            0%, 100% { height: 12px; }
+				            50% { height: 24px; }
+        								}
+     </style>
+</head>
+<body>
+
+<main class="hero">
+
+		    <h1>Bonjour, Little Learners</h1>
+           <h2>Apprendre la prononciation française</h2>
+
+           <p class="subtitle">
+               Learn how to pronounce French words clearly and confidently!
+               Listen, repeat, and have fun speaking French with sounds, games, and practice.
+        </p>
+
+        <!-- SOUND ICON -->
+        <div class="sound" title="Listen and repeat!">
+            <span class="sound-icon">🔊</span>
+            <div class="waves">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+    <h3>By Adhyuth Tamilselvan • Grade 4J</h3>
+    <a class="cta" href="index.html">Start Learning</a> <!-- Link to index page -->
+
+</body>
+</html>
